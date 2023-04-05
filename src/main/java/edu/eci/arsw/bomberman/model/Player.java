@@ -1,12 +1,13 @@
 package edu.eci.arsw.bomberman.model;
 
-public class Player implements elem{
+public class Player {
 
     private int x;
     private int y;
 
     public Player(int x, int y) {
-        place(x,y);
+        this.x = x;
+        this.y = y;
     }
 
     public void setXY(int x,int y) {
@@ -38,9 +39,4 @@ public class Player implements elem{
         this.y = y;
     }
 
-    @Override
-    public void place(int x, int y) {
-        this.x = x;
-        this.y = y
-    }
 }
