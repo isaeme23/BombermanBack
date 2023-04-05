@@ -8,7 +8,7 @@ public class BombermanPersistence {
 
     Board board;
 
-    public BombermanPersistence(){
+    public BombermanPersistence() {
         board = newBoard();
 
         Player player1 = new Player(0, 0);
@@ -18,7 +18,7 @@ public class BombermanPersistence {
         board.setStatusAndPlayerPosition(9, 9, player2);
     }
 
-    public Board newBoard(){
+    public Board newBoard() {
         board = new Board();
         return board;
     }
@@ -27,15 +27,26 @@ public class BombermanPersistence {
         return board;
     }
 
-    public Status getStatusPosition(int x, int y){
-        return board.getStatusPosition(x,y);
+    public Status getStatusPosition(int x, int y) {
+        return board.getStatusPosition(x, y);
     }
 
-    public void setBombToPosition(int x, int y){
+    public void setBombToPosition(int x, int y) {
         board.setStatusAndBombPosition(x, y);
     }
 
-    public void setPlayerToPosition(int x, int y, Player player){
-        board.setStatusAndPlayerPosition(x, y, player);
+    public void setPlayerToPositionRight(Player player) {
+        board.setStatusAndPlayerPositionRight(player);
+    }
+    public void setPlayerToPositionLeft(Player player) {
+        board.setStatusAndPlayerPositionLeft(player);
+    }
+
+    public void setPlayerToPositionUp(Player player) {
+        board.setStatusAndPlayerPositionUp(player);
+    }
+
+    public void setPlayerToPositionDown(Player player) {
+        board.setStatusAndPlayerPositionDown(player);
     }
 }
