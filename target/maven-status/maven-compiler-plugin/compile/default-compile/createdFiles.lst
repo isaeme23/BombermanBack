@@ -1,1 +1,7 @@
-edu/eci/arsw/bomberman/App.class
+edu\eci\arsw\bomberman\persistence\b2.class
+edu\eci\arsw\bomberman\controllers\b1.class
+edu\eci\arsw\bomberman\services\b3.class
+edu\eci\arsw\bomberman\model\Player.class
+edu\eci\arsw\bomberman\model\Board.class
+edu\eci\arsw\bombermanapi\bombermanApi.class
+edu\eci\arsw\bomberman\model\Bomb.class
