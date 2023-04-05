@@ -1,4 +1,4 @@
 package edu.eci.arsw.bomberman.controllers;
 
-public class b1 {
+public class BombermanController {
 }
