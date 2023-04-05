@@ -1,16 +1,12 @@
 package edu.eci.arsw.bomberman.model;
 
-public class Bomb implements elem{
+public class block implements elem{
+
     private int x;
     private int y;
 
-    public Bomb(int x, int y){
+    public block(int x, int y){
         place(x,y);
-    }
-
-    public void explode() {
-        this.x = -1;
-        this.y = -1;
     }
 
     @Override
