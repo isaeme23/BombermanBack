@@ -27,8 +27,33 @@ public class Board {
     }
 
     public void setStatusAndPlayerPosition(int x, int y, Player player){
-        if (getStatusPosition(x, y).equals(Status.EMPTY)){
-            Positions.get(new Pair<>(x, y)).placePlayer(player);
-        }
+        Positions.get(new Pair<>(x, y)).placePlayer(player);
+        player.setXY(x, y);
+    }
+
+    public void setStatusAndPlayerPositionRight(Player player){
+        Positions.get(new Pair<>(player.getX()+1, player.getY())).placePlayer(player);
+        Positions.get(new Pair<>(player.getX(), player.getY())).setStatus(Status.EMPTY);
+        player.moveRight();
+    }
+
+    public void setStatusAndPlayerPositionLeft(Player player){
+        Positions.get(new Pair<>(player.getX()-1, player.getY())).placePlayer(player);
+        Positions.get(new Pair<>(player.getX(), player.getY())).setStatus(Status.EMPTY);
+        player.moveLeft();
+    }
+
+    public void setStatusAndPlayerPositionUp(Player player){
+        Positions.get(new Pair<>(player.getX(), player.getY()+1)).placePlayer(player);
+        Positions.get(new Pair<>(player.getX(), player.getY())).setStatus(Status.EMPTY);
+        player.moveUp();
+
+    }
+
+    public void setStatusAndPlayerPositionDown(Player player){
+        Positions.get(new Pair<>(player.getX(), player.getY()-1)).placePlayer(player);
+        Positions.get(new Pair<>(player.getX(), player.getY())).setStatus(Status.EMPTY);
+        player.moveDown();
+
     }
 }
