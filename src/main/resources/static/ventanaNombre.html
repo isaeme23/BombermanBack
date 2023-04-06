@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet"  href="CSS/app.css">
         <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+        <script src="JS/app.js"></script>
         <!--
         <script src="/webjars/jquery/jquery.min.js"></script>
         <script src="/webjars/sockjs-client/sockjs.min.js"></script>
@@ -18,13 +19,14 @@
     <body>
         <header class="encabezadoInicio">
             <div>
-                <img class="bombaEnc" src="img/Bomb1.webp">
+                <img class="bombaEnc1" src="img/Bomb1.webp">
+                <img class="bombaEnc2" src="img/Bomb2.webp">
             </div>
             <h1 class="encabezados">BombermanARSW</h1>
         </header>
         <div class = "divInicial">
-            
-            <button class ="inicioButton" onclick="">Iniciar</button>
+            <input type="text" class="textos" id="nombre" name="nombre" placeholder="Nombre del jugador">
+            <button class ="nombreButton" onclick="redirigirANombre()">Continuar</button>
         </div>
     </body>
 </html>
