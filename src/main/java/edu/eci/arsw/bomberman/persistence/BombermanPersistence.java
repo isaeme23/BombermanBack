@@ -4,18 +4,24 @@ import edu.eci.arsw.bomberman.model.Board;
 import edu.eci.arsw.bomberman.model.Player;
 import edu.eci.arsw.bomberman.model.Status;
 
+import java.util.concurrent.CopyOnWriteArrayList;
+
 public class BombermanPersistence {
 
     Board board;
+
+    CopyOnWriteArrayList<Player> players;
 
     public BombermanPersistence() {
         board = newBoard();
 
         Player player1 = new Player(0, 0);
         board.setStatusAndPlayerPosition(0, 0, player1);
+        players.add(player1);
 
         Player player2 = new Player(0, 0);
         board.setStatusAndPlayerPosition(9, 9, player2);
+        players.add(player2);
     }
 
     public Board newBoard() {
@@ -48,5 +54,9 @@ public class BombermanPersistence {
 
     public void setPlayerToPositionDown(Player player) {
         board.setStatusAndPlayerPositionDown(player);
+    }
+
+    public CopyOnWriteArrayList<Player> getPlayers() {
+        return players;
     }
 }
