@@ -54,6 +54,5 @@ public class Board {
         Positions.get(new Pair<>(player.getX(), player.getY()-1)).placePlayer(player);
         Positions.get(new Pair<>(player.getX(), player.getY())).setStatus(Status.EMPTY);
         player.moveDown();
-
     }
 }
