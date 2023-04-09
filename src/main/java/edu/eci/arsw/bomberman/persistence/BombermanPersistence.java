@@ -3,18 +3,27 @@ package edu.eci.arsw.bomberman.persistence;
 import edu.eci.arsw.bomberman.model.Board;
 import edu.eci.arsw.bomberman.model.Player;
 import edu.eci.arsw.bomberman.model.Status;
+import org.springframework.stereotype.Service;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+@Service
 public class BombermanPersistence {
 
     Board board;
 
+    ConcurrentHashMap<String, Player> players = new ConcurrentHashMap<>();
+
+    Player player1;
+    Player player2;
+
     public BombermanPersistence() {
         board = newBoard();
 
-        Player player1 = new Player(0, 0);
+        player1 = new Player(0, 0);
         board.setStatusAndPlayerPosition(0, 0, player1);
 
-        Player player2 = new Player(0, 0);
+        player2 = new Player(0, 0);
         board.setStatusAndPlayerPosition(9, 9, player2);
     }
 
@@ -35,18 +44,30 @@ public class BombermanPersistence {
         board.setStatusAndBombPosition(x, y);
     }
 
-    public void setPlayerToPositionRight(Player player) {
-        board.setStatusAndPlayerPositionRight(player);
+    public void setPlayerToPositionRight(String player) {
+        board.setStatusAndPlayerPositionRight(players.get(player));
     }
-    public void setPlayerToPositionLeft(Player player) {
-        board.setStatusAndPlayerPositionLeft(player);
-    }
-
-    public void setPlayerToPositionUp(Player player) {
-        board.setStatusAndPlayerPositionUp(player);
+    public void setPlayerToPositionLeft(String player) {
+        board.setStatusAndPlayerPositionLeft(players.get(player));
     }
 
-    public void setPlayerToPositionDown(Player player) {
-        board.setStatusAndPlayerPositionDown(player);
+    public void setPlayerToPositionUp(String player) {
+        board.setStatusAndPlayerPositionUp(players.get(player));
+    }
+
+    public void setPlayerToPositionDown(String player) {
+        board.setStatusAndPlayerPositionDown(players.get(player));
+    }
+
+    public ConcurrentHashMap<String, Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayer1(String namePlayer1){
+        players.put(namePlayer1, player1);
+    }
+
+    public void setPlayer2(String namePlayer2){
+        players.put(namePlayer2, player2);
     }
 }

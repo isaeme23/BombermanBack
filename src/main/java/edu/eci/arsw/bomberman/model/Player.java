@@ -4,6 +4,7 @@ public class Player {
 
     private int x;
     private int y;
+    String name;
 
     public Player(int x, int y) {
         this.x = x;

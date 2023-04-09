@@ -6,9 +6,9 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"edu.eci.arsw.bomberman"})
-public class BombermanApi {
+public class bombermanApi {
 
     public static void main(String[] args) {
-        SpringApplication.run(BombermanApi.class, args);
+        SpringApplication.run(bombermanApi.class, args);
     }
 }
