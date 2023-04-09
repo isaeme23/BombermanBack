@@ -45,6 +45,7 @@ body{
     left: 32%;
 }
 
+
 .inicioButton {
     overflow: hidden;
     background-color: #b496fa;
@@ -129,6 +130,20 @@ body{
     border-radius: 5px; 
 }
 
+.botonIniciar{
+    overflow: hidden;
+    background-color: #b496fa;
+    width: 200px;
+	height: 70px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    position: absolute;
+    top: 75%;
+    font-family: 'Press Start 2P', cursive;
+}
+
 .divInicial{
     margin: 5% auto;
     display: flex;
@@ -150,13 +165,31 @@ body{
     background-color:#2e3192;
 }
 
+.divPartida{
+    margin: 0.9% auto;
+    display: flex;
+    justify-content: center;
+    width: 1344px;
+	height: 832px;
+    background-color:#2e3192;
+}
+
 
 .h1Nombre{
     position: absolute;
     font-family: 'Press Start 2P', cursive;
     color: white;
-    top: 24%;
     font-size: 25px;
+}
+
+.h1Codigo{
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    position: absolute;
+    top: 30%;
+    padding: 1.5%;
+    border: 2px solid white;
+    border-radius: 5px;
 }
 
 .inputTextos{
@@ -164,10 +197,20 @@ body{
     width: 300px;
     height: 42px;
     border-radius: 5px;
-    font-size: 13px;
+    font-size: 14px;
     font-family: 'Press Start 2P', cursive;
     text-align: center;
-    top: 74%;
+    color: black;
+}
+
+.inputCodigo{
+    position: absolute;
+    width: 200px;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 17px;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
     color: black;
 }
 
@@ -179,4 +222,6 @@ body{
     font-size: 17px;
     top: 30%;
 }
+
+
 

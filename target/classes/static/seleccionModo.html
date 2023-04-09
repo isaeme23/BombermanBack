@@ -25,18 +25,18 @@
             <h1 class="encabezados">BombermanARSW</h1>
         </header>
         <div class = "divInicial">
-            <h1 class = "h1Nombre">Bienvenido, <span id="nombreJugador"></span>!</h1>
+            <h1 class = "h1Nombre" style="top: 24%;">Hola, <span id="nombreJugador"></span>!</h1>
                 <p class= "textos"> Selecciona tu personaje </p>
                 <div class="divPersonaje">
-                    <button class ="personajeButtonBlanco" onclick="" style="background-image: url(img/down/blancoDownGIF.gif);"></button>
-                    <button class ="personajeButtonNegro" onclick="" style="background-image: url(img/down/blancoDownGIF.gif);"></button>
+                    <button class ="personajeButtonBlanco" onclick="guardarImg('img/Down/blancoDownGIF.gif')" style="background-image: url(img/down/blancoDownGIF.gif);"></button>
+                    <button class ="personajeButtonNegro" onclick="guardarImg('img/Down/negroDownGIF.gif')" style="background-image: url(img/down/negroDownGIF.gif);"></button>
                 </div>
             <script>
                 var valor = localStorage.getItem("valorInput");
                 document.getElementById("nombreJugador").innerHTML = valor;
             </script> 
-            <button class ="modoButton" onclick="" style="top: 75%;">Crear una Sala</button>
-            <button class ="modoButton" onclick="" style="top: 81%;">Unirse a sala</button>
+            <button class ="modoButton" onclick="redirigirACrear()" style="top: 75%;">Crear una Sala</button>
+            <button class ="modoButton" onclick="redirigirAUnirse()" style="top: 81%;">Unirse a sala</button>
         </div>
     </body>
 </html>
