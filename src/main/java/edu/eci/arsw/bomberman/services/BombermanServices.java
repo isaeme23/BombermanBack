@@ -2,22 +2,26 @@ package edu.eci.arsw.bomberman.services;
 
 import edu.eci.arsw.bomberman.model.Board;
 import edu.eci.arsw.bomberman.model.Player;
+import edu.eci.arsw.bomberman.model.Position;
 import edu.eci.arsw.bomberman.model.Status;
 import edu.eci.arsw.bomberman.persistence.BombermanPersistence;
+import org.javatuples.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class BombermanServices {
     @Autowired
     BombermanPersistence bp;
 
-    public Board newBoard(){
-        return bp.newBoard();
+    public ConcurrentHashMap<Pair<Integer, Integer>, Position> getBoard() {
+        return bp.getBoard();
     }
 
-    public Board getBoard() {
-        return bp.getBoard();
+    public ConcurrentHashMap<String, Player> getplayers() {
+        return bp.getPlayers();
     }
 
     public void setBombToPosition(int x, int y){
