@@ -28,7 +28,7 @@
             <h1 class = "h1Nombre" style="top: 26%;"><span id="nombreJugador3"></span>, ingresa el código de la sala:</h1>
             <input type="number" class="inputCodigo" id="inputCodigo"  style = "top: 31%;" name="inCodigo" placeholder="Código" maxlength="3">
             <img id= "imagen" src="" style="position: absolute; top: 44%; padding-left: 5px;">
-            <button class = "botonIniciar" onclick="redirigirAPartida() ">Unirse a Juego</button>
+            <button class = "botonIniciar" onclick="verificarCodigo()">Unirse a Juego</button>
             <script>
                 var nombre = localStorage.getItem("valorInput");
                 var imagenPersonaje = localStorage.getItem("imagenPersonaje");
