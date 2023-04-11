@@ -10,7 +10,6 @@
         <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
         <script src="/webjars/jquery/jquery.min.js"></script>
         <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="JS/game.js"></script>
 
     </head>
     <body>
@@ -21,6 +20,9 @@
             </div>
             <h1 class="encabezados">BombermanARSW</h1>
         </header>
-        <canvas class ="canvasPartida" id="game"></canvas>
+        <canvas class ="canvasPartida" id="game1" onclick="game.board2()"></canvas>
     </body>
+    <script src="JS/client.js"></script>
+    <script src="JS/game.js" id="game"></script>
+
 </html>
