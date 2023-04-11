@@ -1,9 +1,6 @@
 package edu.eci.arsw.bomberman.services;
 
-import edu.eci.arsw.bomberman.model.Board;
-import edu.eci.arsw.bomberman.model.Player;
-import edu.eci.arsw.bomberman.model.Position;
-import edu.eci.arsw.bomberman.model.Status;
+import edu.eci.arsw.bomberman.model.*;
 import edu.eci.arsw.bomberman.persistence.BombermanPersistence;
 import org.javatuples.Pair;
 import org.springframework.beans.factory.annotation.Autowired;

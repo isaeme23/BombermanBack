@@ -17,16 +17,16 @@ public class BombermanPersistence {
     Player player2;
 
     public BombermanPersistence(){
-        for (int x = 0; x < 10; x++){
-            for (int y = 0; y < 10; y++){
+        for (int x = 0; x < 13; x++){
+            for (int y = 0; y < 21; y++){
                 Positions.put(new Pair<>(x, y), new Position(x, y));
             }
         }
         player1 = new Player(0, 0);
-        setStatusAndPlayerPosition(0, 0, player1);
+        setStatusAndPlayerPosition(1, 1, player1);
 
         player2 = new Player(0, 0);
-        setStatusAndPlayerPosition(9, 9, player2);
+        setStatusAndPlayerPosition(11, 19, player2);
     }
 
     public Status getStatusPosition(int x, int y){
