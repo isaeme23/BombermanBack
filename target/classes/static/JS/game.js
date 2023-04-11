@@ -12,14 +12,11 @@ var game = (function(client){
         client.getBoard(tablero);
     }
 
-    var tablero = function(data){
+var tablero = function(data){
     for (let row = 0; row < numRows; row++){
         let fila = []
         for (let col = 0; col < numCols; col++){
-            console.log("entro for");
             let index = "["+ row.toString()+", "+col.toString()+"]"
-            console.log("entro for");
-            console.log(data[index]);
             if (row === 0 || col === 0 || row === 12 || col === 20){
                 fila.push("0");
             } else if (data[index].status === "EMPTY"){
@@ -29,12 +26,12 @@ var game = (function(client){
             } else if (data[index].status === "BOMB"){
                 fila.push("2");
             }
-            
+
         }
         board.push(fila);
     }
-        console.log(board);
-    }
+    dibujarTablero();
+}
 
 
     const brickImg = new Image();
@@ -42,6 +39,30 @@ var game = (function(client){
 
     const borderImg = new Image();
     brickImg.src = '../img/bloqueGris.png';
+
+    function dibujarTablero(){
+        // board.map((casillasList) => {
+        //     casillasList.map((casilla)=>{
+        //         //context.drawImage(borderImg, j * blockSize, i *blockSize, blockSize, blockSize)
+        //         context.fillStyle = "#fff"
+        //     })
+        // })
+        for (let i = 0; i < 13; i++){
+            for (let j = 0; j < 21; j++){
+                context.fillStyle = "#fff";
+                context.fillRect(1, 1, 64, 64);
+                console.log(board[i][j] === "0")
+                // if(board[i][j] === "0"){
+                //     //context.drawImage(borderImg, j * blockSize, i *blockSize, blockSize, blockSize)
+                //     context.fillStyle = "#fff";
+                //     context.fillRect(j * blockSize, i *blockSize, blockSize, blockSize);
+                // }
+                }
+            }    
+        }
+
+
+
         return{
             board2:board2
         };
