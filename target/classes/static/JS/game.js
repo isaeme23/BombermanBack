@@ -25,6 +25,10 @@ var tablero = function(data){
                 fila.push("1");
             } else if (data[index].status === "BOMB"){
                 fila.push("2");
+            } else if (data[index].status === "BOMBPLAYER"){
+                fila.push("3");
+            } else if (data[index].status === "DEAD"){
+                fila.push("4");
             }
 
         }
@@ -33,37 +37,186 @@ var tablero = function(data){
     dibujarTablero();
 }
 
+// const brickImg = new Image();
+// brickImg.src = '../img/ladrilloRojo.png';
 
-    const brickImg = new Image();
-    brickImg.src = '../img/ladrilloRojo.png';
+// const borderImg = new Image();
+// brickImg.src = '../img/bloqueGris.png';
 
-    const borderImg = new Image();
-    brickImg.src = '../img/bloqueGris.png';
-
-    function dibujarTablero(){
-        // board.map((casillasList) => {
-        //     casillasList.map((casilla)=>{
-        //         //context.drawImage(borderImg, j * blockSize, i *blockSize, blockSize, blockSize)
-        //         context.fillStyle = "#fff"
-        //     })
-        // })
-        for (let i = 0; i < 13; i++){
-            for (let j = 0; j < 21; j++){
-                context.fillStyle = "#fff";
-                context.fillRect(1, 1, 64, 64);
-                console.log(board[i][j] === "0")
-                // if(board[i][j] === "0"){
-                //     //context.drawImage(borderImg, j * blockSize, i *blockSize, blockSize, blockSize)
-                //     context.fillStyle = "#fff";
-                //     context.fillRect(j * blockSize, i *blockSize, blockSize, blockSize);
-                // }
-                }
-            }    
+function dibujarTablero(){
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < board.length; i++){
+        for (let j = 0; j < board[i].length; j++){
+            if(board[i][j] === "0"){
+                context.fillStyle = 'black';
+                context.fillRect(blockSize*j, blockSize*i, blockSize, blockSize);
+                context.fillStyle = 'white';
+                context.fillRect(blockSize*j, blockSize*i, blockSize - 2, blockSize - 2);
+                context.fillStyle = '#a9a9a9';
+                context.fillRect((blockSize*j) + 2, (blockSize*i)+2, blockSize - 4, blockSize - 4);
+            }
+            else if(board[i][j] === "1") {
+                context.beginPath();
+                context.arc((j+0.5)*blockSize, (i+0.5)*blockSize, blockSize/2.5, 0, 2*Math.PI);
+                context.fillStyle = 'white';
+                context.fill();
+            }
+            else if(board[i][j] === "2") {
+                context.beginPath();
+                context.arc((j+0.5)*blockSize, (i+0.5)*blockSize, blockSize/4, 0, 2*Math.PI);
+                context.fillStyle = 'black';
+                context.fill();
+                context.beginPath();
+                context.arc((j+0.5)*blockSize, (i+0.5)*blockSize, blockSize/8, 0, 2*Math.PI);
+                context.fillStyle = 'red';
+                context.fill();
+            }
+            else if(board[i][j] === "3") {
+                context.beginPath();
+                context.arc((j+0.5)*blockSize, (i+0.5)*blockSize, blockSize/2.5, 0, 2*Math.PI);
+                context.fillStyle = 'white';
+                context.fill();
+                context.beginPath();
+                context.arc((j+0.5)*blockSize, (i+0.5)*blockSize, blockSize/4, 0, 2*Math.PI);
+                context.fillStyle = 'black';
+                context.fill();
+                context.beginPath();
+                context.arc((j+0.5)*blockSize, (i+0.5)*blockSize, blockSize/8, 0, 2*Math.PI);
+                context.fillStyle = 'red';
+                context.fill();
+            }
+            else if(board[i][j] === "4") {
+                context.beginPath();
+                context.arc((j+0.5)*blockSize, (i+0.5)*blockSize, blockSize/2.5, 0, 2*Math.PI);
+                context.fillStyle = 'red';
+                context.fill();
+            }
         }
+    }    
+}
 
+document.addEventListener('keydown', function(e) {
+    let row = 1;
+    let col = 1;
+  
+    // encuentra la posición actual del jugador en la matriz board
+    for (let i = 0; i < board.length; i++){
+        for (let j = 0; j < board[i].length; j++){
+            if (board[i][j] === "1"||board[i][j] === "3") {
+                row = i;
+                col = j;
+                break;
+            }
+        }
+    }
+    
+    // left arrow key
+    if (e.code === "ArrowLeft") {
+        // verifica que no esté en el borde izquierdo y que no esté muerto
+        if (col > 1 && board[row][col]!=="4") {
+            //Verifica si un jugador está colocando una bomba
+            if (board[row][col]==="3"){
+                board[row][col] = "2";
+                board[row][col-1] = "1"
+            }
+            else{
+                //verifica que si me muevo a una bomba cambie estado
+                if(board[row][col-1] === "2"){
+                    board[row][col] = "";
+                    board[row][col-1] = "4";
+                }
+                else{
+                    // actualiza la posición del jugador en la matriz
+                    board[row][col] = "";
+                    board[row][col-1] = "1";
+                }
+            }
+        }
+    }
+    // up arrow key
+    else if (e.code === "ArrowUp") {
+        // verifica que no esté en el borde superior y que no esté muerto
+        if (row > 1 && board[row][col]!=="4") {
+            //Verifica si es un jugador colocando bomba
+            if (board[row][col]==="3"){
+                board[row][col] = "2";
+                board[row-1][col] = "1";
+            }
+            else{
+                //verifica que si me muevo a una bomba cambie estado
+                if(board[row-1][col] === "2"){
+                    board[row][col] = "";
+                    board[row-1][col] = "4";
+                }
+                else{
+                    // actualiza la posición del jugador en la matriz
+                    board[row][col] = "";
+                    board[row-1][col] = "1";
+                }
+            }
+        }
+    }
+    // right arrow key
+    else if (e.code === "ArrowRight") {
+        // verifica que no esté en el borde derecho y que no esté muerto
+        if (col < numCols-2 && board[row][col]!=="4") {
+            //Verifica si es un jugador colocando bomba
+            if (board[row][col]==="3"){
+                board[row][col] = "2";
+                board[row][col+1] = "1";
+            }
+            else{
+                //verifica que si me muevo a una bomba cambie estado
+                if(board[row][col+1] === "2"){
+                    board[row][col] = "";
+                    board[row][col+1] = "4";
+                }
+                else{
+                // actualiza la posición del jugador en la matriz
+                    board[row][col] = "";
+                    board[row][col+1] = "1";
+                }
+            }
+        }
+    }
+    // down arrow key
+    else if (e.code === "ArrowDown") {
+        // verifica que no esté en el borde inferior y que no esté muerto
+        if (row < numRows-2 && board[row][col]!=="4") {
+            //Verifica si es un jugador colocando bomba
+            if (board[row][col]==="3"){
+                board[row][col] = "2";
+                board[row+1][col] = "1";
+            }
+            else{
+                //verifica que si me muevo a una bomba cambie estado
+                if(board[row+1][col] === "2"){
+                    board[row][col] = "";
+                    board[row+1][col] = "4";
+                }
+                else{
+                // actualiza la posición del jugador en la matriz
+                    board[row][col] = "";
+                    board[row+1][col] = "1";
+                }
+            }
+        }
+    }
+    // space key
+    else if (e.code === "Space") {
+        // verifica que el jugador no haya colocado una bomba previamente en la posición actual y que no esté muerto
+        if (board[row][col] !== "2" && board[row][col] !== "4") {
+            // actualiza la posición del jugador en la matriz y coloca la bomba
+            board[row][col] = "3";
+        }
+    }
 
+    // dibuja el tablero con la nueva posición del jugador
+    dibujarTablero();
+});
 
-        return{
-            board2:board2
-        };
+return{
+    board2:board2
+};
+
 })(client);
