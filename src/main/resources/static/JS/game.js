@@ -8,6 +8,7 @@ var game = (function(client){
     const numCols = 21;
     var board = []
     const nombre = localStorage.getItem("valorInput");
+    var stompClient = null;
 
     function board2(){
         client.getBoard(tablero);
@@ -239,6 +240,7 @@ document.addEventListener('keydown', function(e) {
     // dibuja el tablero con la nueva posición del jugador
     //dibujarTablero();
     boardAgain();
+
 });
 
 var connectAndSubscribe = function () {
@@ -249,16 +251,21 @@ var connectAndSubscribe = function () {
         //subscribe to /topic/TOPICXX when connections succeed
         stompClient.connect({}, function (frame) {
             console.log('Connected: ' + frame);
-            stompClient.subscribe('/topic/TOPICXX', function (eventbody) {
-                stompClient.send()
+            stompClient.subscribe('/topic/board', function (eventbody) {
+                boardAgain();
             });
         });
-
     };
 
 return{
+    init: function () {
+        board2();
+        connectAndSubscribe();
+    },
+
     board2:board2,
-    boardAgain:boardAgain
+    boardAgain:boardAgain,
+    connectAndSubscribe
 };
 
 })(client);
