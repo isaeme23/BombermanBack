@@ -7,19 +7,25 @@ var game = (function(client){
     const numRows = 13;
     const numCols = 21;
     var board = []
+    const nombre = localStorage.getItem("valorInput");
 
     function board2(){
         client.getBoard(tablero);
         getName();
     }
 
+    function boardAgain(){
+        client.getBoard(tablero);
+    }
+
     function getName(){
-        var nombre = localStorage.getItem("valorInput");
-        client.putNamePlayer(nombre);
-        console.log(nombre);
+        let name = localStorage.getItem("valorInput");
+        client.putNamePlayer(name);
+        console.log(name);
     }
 
 var tablero = function(data){
+    board = [];
     for (let row = 0; row < numRows; row++){
         let fila = []
         for (let col = 0; col < numCols; col++){
@@ -112,11 +118,10 @@ document.addEventListener('keydown', function(e) {
     // left arrow key
     if (e.code === "ArrowLeft") {
         let movement = {
-            player : localStorage.getItem("valorInput"),
-            movement : "Left"
+            player : nombre,
+            movement : "Down"
         };
         client.putPlayerMovement(movement);
-        board2();
         // verifica que no esté en el borde izquierdo y que no esté muerto
         if (col > 1 && board[row][col]!=="4") {
             //Verifica si un jugador está colocando una bomba
@@ -140,6 +145,11 @@ document.addEventListener('keydown', function(e) {
     }
     // up arrow key
     else if (e.code === "ArrowUp") {
+        let movement = {
+            player : nombre,
+            movement : "Left"
+        };
+        client.putPlayerMovement(movement);
         // verifica que no esté en el borde superior y que no esté muerto
         if (row > 1 && board[row][col]!=="4") {
             //Verifica si es un jugador colocando bomba
@@ -164,9 +174,9 @@ document.addEventListener('keydown', function(e) {
     // right arrow key
     else if (e.code === "ArrowRight") {
         let movement = {
-                    player : localStorage.getItem("valorInput"),
-                    movement : "Right"
-                    }
+            player : nombre,
+            movement : "Up"
+            }
         client.putPlayerMovement(movement);
         // verifica que no esté en el borde derecho y que no esté muerto
         if (col < numCols-2 && board[row][col]!=="4") {
@@ -191,6 +201,11 @@ document.addEventListener('keydown', function(e) {
     }
     // down arrow key
     else if (e.code === "ArrowDown") {
+        let movement = {
+            player : nombre,
+            movement : "Right"
+        };
+        client.putPlayerMovement(movement);
         // verifica que no esté en el borde inferior y que no esté muerto
         if (row < numRows-2 && board[row][col]!=="4") {
             //Verifica si es un jugador colocando bomba
@@ -223,12 +238,12 @@ document.addEventListener('keydown', function(e) {
 
     // dibuja el tablero con la nueva posición del jugador
     //dibujarTablero();
-    board2();
-    dibujarTablero();
+    boardAgain();
 });
 
 return{
-    board2:board2
+    board2:board2,
+    boardAgain:boardAgain
 };
 
 })(client);
