@@ -239,7 +239,8 @@ document.addEventListener('keydown', function(e) {
 
     // dibuja el tablero con la nueva posición del jugador
     //dibujarTablero();
-    boardAgain();
+    //boardAgain();
+    publishBoard();
 
 });
 
@@ -256,6 +257,10 @@ var connectAndSubscribe = function () {
             });
         });
     };
+
+    var publishBoard = function(){
+            stompClient.send("/topic/board", {}, "");
+        }
 
 return{
     init: function () {
