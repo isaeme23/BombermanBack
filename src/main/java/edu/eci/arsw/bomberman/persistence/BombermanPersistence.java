@@ -17,8 +17,8 @@ public class BombermanPersistence {
     Player player2;
 
     public BombermanPersistence(){
-        for (int x = 0; x < 13; x++){
-            for (int y = 0; y < 21; y++){
+        for (int x = 0; x < 21; x++){
+            for (int y = 0; y < 13; y++){
                 Positions.put(new Pair<>(x, y), new Position(x, y));
             }
         }
@@ -26,7 +26,7 @@ public class BombermanPersistence {
         setStatusAndPlayerPosition(1, 1, player1);
 
         player2 = new Player(0, 0);
-        setStatusAndPlayerPosition(11, 19, player2);
+        setStatusAndPlayerPosition(19, 11, player2);
     }
 
     public Status getStatusPosition(int x, int y){
@@ -53,13 +53,13 @@ public class BombermanPersistence {
     }
 
     public void setStatusAndPlayerPositionUp(Player player){
-        Positions.get(new Pair<>(player.getX(), player.getY()+1)).placePlayer(player);
+        Positions.get(new Pair<>(player.getX(), player.getY()-1)).placePlayer(player);
         player.moveUp();
 
     }
 
     public void setStatusAndPlayerPositionDown(Player player){
-        Positions.get(new Pair<>(player.getX(), player.getY()-1)).placePlayer(player);
+        Positions.get(new Pair<>(player.getX(), player.getY()+1)).placePlayer(player);
         player.moveDown();
     }
 

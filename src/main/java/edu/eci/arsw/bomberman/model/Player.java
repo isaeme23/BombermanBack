@@ -29,11 +29,11 @@ public class Player {
     }
 
     public void moveUp() {
-        this.y = y + 1;
+        this.y = y - 1;
     }
 
     public void moveDown() {
-        this.y = y - 1;
+        this.y = y + 1;
     }
 
     public void moveLeft() {

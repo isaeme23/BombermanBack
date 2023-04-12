@@ -30,7 +30,8 @@ var tablero = function(data){
     for (let row = 0; row < numRows; row++){
         let fila = []
         for (let col = 0; col < numCols; col++){
-            let index = "["+ row.toString()+", "+col.toString()+"]"
+            let index = "["+ col.toString()+", "+row.toString()+"]"
+            console.log(index);
             if (row === 0 || col === 0 || row === 12 || col === 20){
                 fila.push("0");
             } else if (data[index].status === "EMPTY"){
@@ -119,7 +120,7 @@ document.addEventListener('keydown', function(e) {
     if (e.code === "ArrowLeft") {
         let movement = {
             player : nombre,
-            movement : "Down"
+            movement : "Left"
         };
         client.putPlayerMovement(movement);
         // verifica que no esté en el borde izquierdo y que no esté muerto
@@ -147,7 +148,7 @@ document.addEventListener('keydown', function(e) {
     else if (e.code === "ArrowUp") {
         let movement = {
             player : nombre,
-            movement : "Left"
+            movement : "Up"
         };
         client.putPlayerMovement(movement);
         // verifica que no esté en el borde superior y que no esté muerto
@@ -175,7 +176,7 @@ document.addEventListener('keydown', function(e) {
     else if (e.code === "ArrowRight") {
         let movement = {
             player : nombre,
-            movement : "Up"
+            movement : "Right"
             }
         client.putPlayerMovement(movement);
         // verifica que no esté en el borde derecho y que no esté muerto
@@ -203,7 +204,7 @@ document.addEventListener('keydown', function(e) {
     else if (e.code === "ArrowDown") {
         let movement = {
             player : nombre,
-            movement : "Right"
+            movement : "Down"
         };
         client.putPlayerMovement(movement);
         // verifica que no esté en el borde inferior y que no esté muerto

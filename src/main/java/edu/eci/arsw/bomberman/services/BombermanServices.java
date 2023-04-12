@@ -43,7 +43,7 @@ public class BombermanServices {
     }
 
     public void setPlayerToPositionRight(String player){
-        if (!bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()).equals(Status.DEAD)){
+        if (!bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()).equals(Status.DEAD) && bp.getPlayers().get(player).getX() < 19){
             if (bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()).equals(Status.BOMBPLAYER)) {
                 if (bp.getStatusPosition(bp.getPlayers().get(player).getX()+1, bp.getPlayers().get(player).getY()).equals(Status.EMPTY)){
                     bp.setPlayerToPositionRight(player);
@@ -70,7 +70,7 @@ public class BombermanServices {
     }
 
     public void setPlayerToPositionLeft(String player){
-        if (!bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()).equals(Status.DEAD)){
+        if (!bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()).equals(Status.DEAD) && bp.getPlayers().get(player).getX() > 1){
             if (bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()).equals(Status.BOMBPLAYER)) {
                 if (bp.getStatusPosition(bp.getPlayers().get(player).getX()-1, bp.getPlayers().get(player).getY()).equals(Status.EMPTY)){
                     bp.setPlayerToPositionLeft(player);
@@ -96,23 +96,23 @@ public class BombermanServices {
     }
 
     public void setPlayerToPositionDown(String player){
-        if (!bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()).equals(Status.DEAD)){
+        if (!bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()).equals(Status.DEAD) && bp.getPlayers().get(player).getY() < 11){
             if (bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()).equals(Status.BOMBPLAYER)) {
-                if (bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()-1).equals(Status.EMPTY)){
+                if (bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()+1).equals(Status.EMPTY)){
                     bp.setPlayerToPositionDown(player);
-                    bp.setStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()+1, Status.BOMB);
-                } else if (bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()-1).equals(Status.BOMB)){
+                    bp.setStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()-1, Status.BOMB);
+                } else if (bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()+1).equals(Status.BOMB)){
                     bp.setPlayerToPositionDown(player);
-                    bp.setStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()+1, Status.EMPTY);
+                    bp.setStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()-1, Status.EMPTY);
                     bp.setStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY(), Status.DEAD);
                 }
             } else {
-                if (bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()-1).equals(Status.EMPTY)){
+                if (bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()+1).equals(Status.EMPTY)){
                     bp.setPlayerToPositionDown(player);
-                    bp.setStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()+1, Status.EMPTY);
-                } else if (bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()-1).equals(Status.BOMB)){
+                    bp.setStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()-1, Status.EMPTY);
+                } else if (bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()+1).equals(Status.BOMB)){
                     bp.setPlayerToPositionDown(player);
-                    bp.setStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()+1, Status.EMPTY);
+                    bp.setStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()-1, Status.EMPTY);
                     bp.setStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY(), Status.DEAD);
                 }
             }
@@ -121,21 +121,21 @@ public class BombermanServices {
     }
 
     public void setPlayerToPositionUp(String player){
-        if (!bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()).equals(Status.DEAD)){
+        if (!bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()).equals(Status.DEAD) && bp.getPlayers().get(player).getY() > 1){
             if (bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()).equals(Status.BOMBPLAYER)) {
-                if (bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()+1).equals(Status.EMPTY)){
+                if (bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()-1).equals(Status.EMPTY)){
                     bp.setPlayerToPositionUp(player);
                     bp.setStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()-1, Status.BOMB);
-                } else if (bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()+1).equals(Status.BOMB)){
+                } else if (bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()-1).equals(Status.BOMB)){
                     bp.setPlayerToPositionUp(player);
-                    bp.setStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()-1, Status.EMPTY);
+                    bp.setStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()+1, Status.EMPTY);
                     bp.setStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY(), Status.DEAD);
                 }
             } else {
-                if (bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()+1).equals(Status.EMPTY)){
+                if (bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()-1).equals(Status.EMPTY)){
                     bp.setPlayerToPositionUp(player);
-                    bp.setStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()-1, Status.EMPTY);
-                } else if (bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()+1).equals(Status.BOMB)){
+                    bp.setStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()+1, Status.EMPTY);
+                } else if (bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()-1).equals(Status.BOMB)){
                     bp.setPlayerToPositionUp(player);
                     bp.setStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()-1, Status.EMPTY);
                     bp.setStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY(), Status.DEAD);
