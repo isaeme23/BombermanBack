@@ -3,23 +3,26 @@ client=(function(){
 	return {
 		getBoard:function(callback){
 			$.get(`http://localhost:8080/board`, function(data) {callback(data)});
-		}
-		/*putUpdateBoard:function(board){
+		},
+		getPlayers:function(callback){
+        	$.get(`http://localhost:8080/board/players`, function(data) {callback(data)});
+        },
+		putNamePlayer:function(name){
 		   return $.ajax({
-               url: `http://localhost:8080/board`,
+               url: `http://localhost:8080/board/players/${name}`,
                type: 'PUT',
-               data: JSON.stringify(blueprint),
+               data: name,
                contentType: "application/json"
            });
 		},
-		deletePlayer:function(player){
-		    return $.ajax({
-               url: `http://localhost:8080/board/${player.name}`,
-               type: 'DELETE',
-               data: JSON.stringify(blueprint),
+		putPlayerMovement:function(movement){
+           return $.ajax({
+               url: `http://localhost:8080/board/players/${movement.player}/${movement.movement}`,
+               type: 'PUT',
+               data: JSON.stringify(movement),
                contentType: "application/json"
            });
-		}*/
+        }
 	}
 
 })();

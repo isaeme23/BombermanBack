@@ -100,7 +100,6 @@ public class BombermanPersistence {
     public void setPlayer1(String namePlayer1){
         players.put(namePlayer1, player1);
     }
-
     public void setPlayer2(String namePlayer2){
         players.put(namePlayer2, player2);
     }

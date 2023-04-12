@@ -6,6 +6,7 @@ import org.javatuples.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
@@ -19,6 +20,20 @@ public class BombermanServices {
 
     public ConcurrentHashMap<String, Player> getplayers() {
         return bp.getPlayers();
+    }
+
+    public void movement(String player, String movement){
+        if (movement.equals("Right")){
+            setPlayerToPositionRight(player);
+        } else if (movement.equals("Up")){
+            setPlayerToPositionUp(player);
+        } else if (movement.equals("Down")){
+            setPlayerToPositionDown(player);
+        } else if (movement.equals("Left")){
+            setPlayerToPositionLeft(player);
+        } else if (movement.equals("Bomb")){
+            setBombToPosition(getplayers().get(player).getX(), getplayers().get(player).getY());
+        }
     }
 
     public void setBombToPosition(int x, int y){

@@ -10,6 +10,13 @@ var game = (function(client){
 
     function board2(){
         client.getBoard(tablero);
+        getName();
+    }
+
+    function getName(){
+        var nombre = localStorage.getItem("valorInput");
+        client.putNamePlayer(nombre);
+        console.log(nombre);
     }
 
 var tablero = function(data){
@@ -36,12 +43,6 @@ var tablero = function(data){
     }
     dibujarTablero();
 }
-
-// const brickImg = new Image();
-// brickImg.src = '../img/ladrilloRojo.png';
-
-// const borderImg = new Image();
-// brickImg.src = '../img/bloqueGris.png';
 
 function dibujarTablero(){
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -96,8 +97,6 @@ function dibujarTablero(){
 }
 
 document.addEventListener('keydown', function(e) {
-    let row = 1;
-    let col = 1;
   
     // encuentra la posición actual del jugador en la matriz board
     for (let i = 0; i < board.length; i++){
@@ -112,6 +111,12 @@ document.addEventListener('keydown', function(e) {
     
     // left arrow key
     if (e.code === "ArrowLeft") {
+        let movement = {
+            player : localStorage.getItem("valorInput"),
+            movement : "Left"
+        };
+        client.putPlayerMovement(movement);
+        board2();
         // verifica que no esté en el borde izquierdo y que no esté muerto
         if (col > 1 && board[row][col]!=="4") {
             //Verifica si un jugador está colocando una bomba
@@ -158,6 +163,11 @@ document.addEventListener('keydown', function(e) {
     }
     // right arrow key
     else if (e.code === "ArrowRight") {
+        let movement = {
+                    player : localStorage.getItem("valorInput"),
+                    movement : "Right"
+                    }
+        client.putPlayerMovement(movement);
         // verifica que no esté en el borde derecho y que no esté muerto
         if (col < numCols-2 && board[row][col]!=="4") {
             //Verifica si es un jugador colocando bomba
@@ -212,6 +222,8 @@ document.addEventListener('keydown', function(e) {
     }
 
     // dibuja el tablero con la nueva posición del jugador
+    //dibujarTablero();
+    board2();
     dibujarTablero();
 });
 
