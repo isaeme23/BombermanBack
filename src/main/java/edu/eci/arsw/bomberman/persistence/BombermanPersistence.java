@@ -34,9 +34,7 @@ public class BombermanPersistence {
     }
 
     public void setStatusAndBombPosition(int x, int y){
-        if (getStatusPosition(x, y).equals(Status.EMPTY)) {
-            Positions.get(new Pair<>(x, y)).placeBomb(new Bomb(x, y));
-        }
+        Positions.get(new Pair<>(x, y)).placeBomb(new Bomb(x, y));
     }
 
     public void setStatusAndPlayerPosition(int x, int y, Player player){
@@ -46,26 +44,22 @@ public class BombermanPersistence {
 
     public void setStatusAndPlayerPositionRight(Player player){
         Positions.get(new Pair<>(player.getX()+1, player.getY())).placePlayer(player);
-        Positions.get(new Pair<>(player.getX(), player.getY())).setStatus(Status.EMPTY);
         player.moveRight();
     }
 
     public void setStatusAndPlayerPositionLeft(Player player){
         Positions.get(new Pair<>(player.getX()-1, player.getY())).placePlayer(player);
-        Positions.get(new Pair<>(player.getX(), player.getY())).setStatus(Status.EMPTY);
         player.moveLeft();
     }
 
     public void setStatusAndPlayerPositionUp(Player player){
         Positions.get(new Pair<>(player.getX(), player.getY()+1)).placePlayer(player);
-        Positions.get(new Pair<>(player.getX(), player.getY())).setStatus(Status.EMPTY);
         player.moveUp();
 
     }
 
     public void setStatusAndPlayerPositionDown(Player player){
         Positions.get(new Pair<>(player.getX(), player.getY()-1)).placePlayer(player);
-        Positions.get(new Pair<>(player.getX(), player.getY())).setStatus(Status.EMPTY);
         player.moveDown();
     }
 
@@ -102,5 +96,9 @@ public class BombermanPersistence {
     }
     public void setPlayer2(String namePlayer2){
         players.put(namePlayer2, player2);
+    }
+
+    public void setStatusPosition(int x, int y, Status status){
+        Positions.get(new Pair<>(x, y)).setStatus(status);
     }
 }

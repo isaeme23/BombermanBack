@@ -44,7 +44,6 @@ var tablero = function(data){
             } else if (data[index].status === "DEAD"){
                 fila.push("4");
             }
-
         }
         board.push(fila);
     }
@@ -230,6 +229,11 @@ document.addEventListener('keydown', function(e) {
     }
     // space key
     else if (e.code === "Space") {
+        let movement = {
+            player : nombre,
+            movement : "Bomb"
+        };
+        client.putPlayerMovement(movement);
         // verifica que el jugador no haya colocado una bomba previamente en la posición actual y que no esté muerto
         if (board[row][col] !== "2" && board[row][col] !== "4") {
             // actualiza la posición del jugador en la matriz y coloca la bomba

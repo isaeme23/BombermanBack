@@ -14,7 +14,7 @@ public class Position {
 
     public void placeBomb(Bomb placeHolder){
         this.placeHolder = placeHolder;
-        setStatus(Status.BOMB);
+        setStatus(Status.BOMBPLAYER);
     }
 
     public void placePlayer(Player placeHolder){
