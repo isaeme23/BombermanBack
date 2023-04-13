@@ -10,6 +10,7 @@ var game = (function(client){
     const nombre = localStorage.getItem("valorInput");
     var stompClient = null;
     var loser = null;
+    var dataplayer = {};
 
     function board2(){
         client.getBoard(tablero);
@@ -18,12 +19,12 @@ var game = (function(client){
 
     function boardAgain(){
         client.getBoard(tablero);
+
     }
 
     function getName(){
         let name = localStorage.getItem("valorInput");
         client.putNamePlayer(name);
-        console.log(name);
     }
 
 var tablero = function(data){
@@ -32,7 +33,6 @@ var tablero = function(data){
         let fila = []
         for (let col = 0; col < numCols; col++){
             let index = "["+ col.toString()+", "+row.toString()+"]"
-            console.log(index);
             if (row === 0 || col === 0 || row === 12 || col === 20){
                 fila.push("0");
             } else if (data[index].status === "EMPTY"){
@@ -101,8 +101,20 @@ function dibujarTablero(){
                 context.fill();
             }
         }
-    }    
+    }
 }
+
+    function getPlayers(){
+        client.getPlayers(players)
+    }
+
+    var x = "";
+    var y = "";
+
+    var players = function(data){
+        x = data[nombre].x;
+        y = data[nombre].y;
+    }
 
 document.addEventListener('keydown', function(e) {
   
@@ -246,6 +258,13 @@ document.addEventListener('keydown', function(e) {
     // dibuja el tablero con la nueva posición del jugador
     //dibujarTablero();
     //boardAgain();
+    getPlayers();
+    console.log(board[x][y]);
+    if (board[x][y]=== "4"){
+        loser = {
+            name : nombre
+        };
+    }
     publishBoard();
 
 });
@@ -260,13 +279,17 @@ var connectAndSubscribe = function () {
             console.log('Connected: ' + frame);
             stompClient.subscribe('/topic/board', function (eventbody) {
                 boardAgain();
+                var theObject=JSON.parse(eventbody.body);
+                if (theObject !== null){
+                    alert(JSON.stringify(theObject));
+                }
             });
         });
     };
 
     var publishBoard = function(){
-            stompClient.send("/topic/board", {}, "");
-        }
+         stompClient.send("/topic/board", {}, JSON.stringify(loser));
+    }
 
 return{
     init: function () {

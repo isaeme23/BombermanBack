@@ -101,4 +101,5 @@ public class BombermanPersistence {
     public void setStatusPosition(int x, int y, Status status){
         Positions.get(new Pair<>(x, y)).setStatus(status);
     }
+
 }
