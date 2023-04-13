@@ -116,19 +116,7 @@ function dibujarTablero(){
         y = data[nombre].y;
     }
 
-document.addEventListener('keydown', function(e) {
-  
-    // encuentra la posición actual del jugador en la matriz board
-    for (let i = 0; i < board.length; i++){
-        for (let j = 0; j < board[i].length; j++){
-            if (board[i][j] === "1"||board[i][j] === "3") {
-                row = i;
-                col = j;
-                break;
-            }
-        }
-    }
-    
+document.addEventListener('keydown', function(e) {    
     // left arrow key
     if (e.code === "ArrowLeft") {
         let movement = {
@@ -136,26 +124,7 @@ document.addEventListener('keydown', function(e) {
             movement : "Left"
         };
         client.putPlayerMovement(movement);
-        // verifica que no esté en el borde izquierdo y que no esté muerto
-        if (col > 1 && board[row][col]!=="4") {
-            //Verifica si un jugador está colocando una bomba
-            if (board[row][col]==="3"){
-                board[row][col] = "2";
-                board[row][col-1] = "1"
-            }
-            else{
-                //verifica que si me muevo a una bomba cambie estado
-                if(board[row][col-1] === "2"){
-                    board[row][col] = "";
-                    board[row][col-1] = "4";
-                }
-                else{
-                    // actualiza la posición del jugador en la matriz
-                    board[row][col] = "";
-                    board[row][col-1] = "1";
-                }
-            }
-        }
+        publishBoard();
     }
     // up arrow key
     else if (e.code === "ArrowUp") {
@@ -164,26 +133,7 @@ document.addEventListener('keydown', function(e) {
             movement : "Up"
         };
         client.putPlayerMovement(movement);
-        // verifica que no esté en el borde superior y que no esté muerto
-        if (row > 1 && board[row][col]!=="4") {
-            //Verifica si es un jugador colocando bomba
-            if (board[row][col]==="3"){
-                board[row][col] = "2";
-                board[row-1][col] = "1";
-            }
-            else{
-                //verifica que si me muevo a una bomba cambie estado
-                if(board[row-1][col] === "2"){
-                    board[row][col] = "";
-                    board[row-1][col] = "4";
-                }
-                else{
-                    // actualiza la posición del jugador en la matriz
-                    board[row][col] = "";
-                    board[row-1][col] = "1";
-                }
-            }
-        }
+        publishBoard();
     }
     // right arrow key
     else if (e.code === "ArrowRight") {
@@ -192,26 +142,7 @@ document.addEventListener('keydown', function(e) {
             movement : "Right"
             }
         client.putPlayerMovement(movement);
-        // verifica que no esté en el borde derecho y que no esté muerto
-        if (col < numCols-2 && board[row][col]!=="4") {
-            //Verifica si es un jugador colocando bomba
-            if (board[row][col]==="3"){
-                board[row][col] = "2";
-                board[row][col+1] = "1";
-            }
-            else{
-                //verifica que si me muevo a una bomba cambie estado
-                if(board[row][col+1] === "2"){
-                    board[row][col] = "";
-                    board[row][col+1] = "4";
-                }
-                else{
-                // actualiza la posición del jugador en la matriz
-                    board[row][col] = "";
-                    board[row][col+1] = "1";
-                }
-            }
-        }
+        publishBoard();
     }
     // down arrow key
     else if (e.code === "ArrowDown") {
@@ -220,26 +151,7 @@ document.addEventListener('keydown', function(e) {
             movement : "Down"
         };
         client.putPlayerMovement(movement);
-        // verifica que no esté en el borde inferior y que no esté muerto
-        if (row < numRows-2 && board[row][col]!=="4") {
-            //Verifica si es un jugador colocando bomba
-            if (board[row][col]==="3"){
-                board[row][col] = "2";
-                board[row+1][col] = "1";
-            }
-            else{
-                //verifica que si me muevo a una bomba cambie estado
-                if(board[row+1][col] === "2"){
-                    board[row][col] = "";
-                    board[row+1][col] = "4";
-                }
-                else{
-                // actualiza la posición del jugador en la matriz
-                    board[row][col] = "";
-                    board[row+1][col] = "1";
-                }
-            }
-        }
+        publishBoard();
     }
     // space key
     else if (e.code === "Space") {
@@ -248,25 +160,8 @@ document.addEventListener('keydown', function(e) {
             movement : "Bomb"
         };
         client.putPlayerMovement(movement);
-        // verifica que el jugador no haya colocado una bomba previamente en la posición actual y que no esté muerto
-        if (board[row][col] !== "2" && board[row][col] !== "4") {
-            // actualiza la posición del jugador en la matriz y coloca la bomba
-            board[row][col] = "3";
-        }
+        publishBoard();
     }
-
-    // dibuja el tablero con la nueva posición del jugador
-    //dibujarTablero();
-    //boardAgain();
-    getPlayers();
-    console.log(board[x][y]);
-    if (board[x][y]=== "4"){
-        loser = {
-            name : nombre
-        };
-    }
-    publishBoard();
-
 });
 
 var connectAndSubscribe = function () {
@@ -279,16 +174,12 @@ var connectAndSubscribe = function () {
             console.log('Connected: ' + frame);
             stompClient.subscribe('/topic/board', function (eventbody) {
                 boardAgain();
-                var theObject=JSON.parse(eventbody.body);
-                if (theObject !== null){
-                    alert(JSON.stringify(theObject));
-                }
             });
         });
     };
 
     var publishBoard = function(){
-         stompClient.send("/topic/board", {}, JSON.stringify(loser));
+         stompClient.send("/topic/board", {}, "");
     }
 
 return{

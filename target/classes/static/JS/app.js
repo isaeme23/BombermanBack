@@ -60,7 +60,7 @@ function verificarNombre() {
       alert("Debes ingresar un nombre para continuar");
     } else {
       guardarNombre();
-      redirigirASeleccion();
+      redirigirAPartida();
     }
 }
 
