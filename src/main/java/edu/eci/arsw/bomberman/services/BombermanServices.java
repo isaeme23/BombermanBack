@@ -142,7 +142,7 @@ public class BombermanServices {
                     bp.setStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()+1, Status.EMPTY);
                 } else if (bp.getStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()-1).equals(Status.BOMB)){
                     bp.setPlayerToPositionUp(player);
-                    bp.setStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()-1, Status.EMPTY);
+                    bp.setStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY()+1, Status.EMPTY);
                     bp.setStatusPosition(bp.getPlayers().get(player).getX(), bp.getPlayers().get(player).getY(), Status.DEAD);
 
                 }
