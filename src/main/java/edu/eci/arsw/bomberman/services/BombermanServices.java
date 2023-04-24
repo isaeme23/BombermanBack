@@ -152,10 +152,13 @@ public class BombermanServices {
 
     public void setPlayerName(String player){
         if (bp.getPlayers().isEmpty()){
-            bp.setPlayer1(player);
-        } else{
-            bp.setPlayer2(player);
+            bp.arrangePlayer(player, 1, 1);
+        } else if (bp.getPlayers().size() == 1){
+            bp.arrangePlayer(player, 19, 11);
+        } else if (bp.getPlayers().size() == 2){
+            bp.arrangePlayer(player, 19, 1);
+        } else if (bp.getPlayers().size() == 3){
+            bp.arrangePlayer(player, 1, 11);
         }
-
     }
 }
