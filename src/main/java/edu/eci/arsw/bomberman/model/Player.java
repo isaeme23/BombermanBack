@@ -4,7 +4,7 @@ public class Player {
 
     private int x;
     private int y;
-    String name;
+    private String color;
 
     public Player(int x, int y) {
         this.x = x;
@@ -14,6 +14,14 @@ public class Player {
     public void setXY(int x,int y) {
         this.x = x;
         this.y = y;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public int getX(){

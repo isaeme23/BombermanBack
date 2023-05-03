@@ -11,15 +11,18 @@ var game = (function(client){
     var stompClient = null;
     var loser = null;
     var dataplayer = {};
+    var colors = ['red', 'blue', 'yellow', 'black']
+    var datos = {};
 
     function board2(){
         client.getBoard(tablero);
         getName();
+        getPlayers();
     }
 
     function boardAgain(){
         client.getBoard(tablero);
-
+        getPlayers()
     }
 
     function getName(){
@@ -49,11 +52,14 @@ var tablero = function(data){
         }
         board.push(fila);
     }
+    getPlayers();
     dibujarTablero();
 }
 
 function dibujarTablero(){
     context.clearRect(0, 0, canvas.width, canvas.height);
+    console.log(datos)
+    let names = Object.keys(datos)
     for (let i = 0; i < board.length; i++){
         for (let j = 0; j < board[i].length; j++){
             if(board[i][j] === "0"){
@@ -67,8 +73,21 @@ function dibujarTablero(){
             else if(board[i][j] === "1") {
                 context.beginPath();
                 context.arc((j+0.5)*blockSize, (i+0.5)*blockSize, blockSize/2.5, 0, 2*Math.PI);
-                context.fillStyle = 'white';
-                context.fill();
+                if (names.length === 0){
+                    context.fillStyle = 'white';
+                    context.fill();
+                } else {
+                    console.log(names.lenght)
+                    for (let k = 0; k < names.length; k++){
+                        if (datos[names[k]].x === j && datos[names[k]].y === i){
+                            context.fillStyle = datos[names[k]].color;
+                            context.fill();
+                            break;
+                    }
+
+                }
+                }
+
             }
             else if(board[i][j] === "2") {
                 context.beginPath();
@@ -102,6 +121,7 @@ function dibujarTablero(){
             }
         }
     }
+
 }
 
     function getPlayers(){
@@ -114,9 +134,10 @@ function dibujarTablero(){
     var players = function(data){
         x = data[nombre].x;
         y = data[nombre].y;
+        datos = data;
     }
 
-document.addEventListener('keydown', function(e) {    
+document.addEventListener('keydown', function(e) {
     // left arrow key
     if (e.code === "ArrowLeft") {
         let movement = {

@@ -13,8 +13,6 @@ public class BombermanPersistence {
 
     ConcurrentHashMap<String, Player> players = new ConcurrentHashMap<>();
 
-
-
     public BombermanPersistence(){
         for (int x = 0; x < 21; x++){
             for (int y = 0; y < 13; y++){
@@ -84,8 +82,9 @@ public class BombermanPersistence {
     public ConcurrentHashMap<String, Player> getPlayers() {
         return players;
     }
-    public void arrangePlayer(String name, int x, int y){
+    public void arrangePlayer(String name, int x, int y, String color){
         players.put(name, new Player(x, y));
+        players.get(name).setColor(color);
         setStatusAndPlayerPosition(x, y, players.get(name));
     }
 
