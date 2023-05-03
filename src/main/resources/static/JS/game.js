@@ -77,15 +77,13 @@ function dibujarTablero(){
                     context.fillStyle = 'white';
                     context.fill();
                 } else {
-                    console.log(names.lenght)
                     for (let k = 0; k < names.length; k++){
                         if (datos[names[k]].x === j && datos[names[k]].y === i){
                             context.fillStyle = datos[names[k]].color;
                             context.fill();
                             break;
+                        }
                     }
-
-                }
                 }
 
             }
@@ -121,7 +119,6 @@ function dibujarTablero(){
             }
         }
     }
-
 }
 
     function getPlayers(){
@@ -194,13 +191,18 @@ var connectAndSubscribe = function () {
         stompClient.connect({}, function (frame) {
             console.log('Connected: ' + frame);
             stompClient.subscribe('/topic/board', function (eventbody) {
+                var abc = JSON.parse(eventbody.body);
+                console.log(abc.length)
+                if (abc.length === 1){
+                    alert("Ganador:" + abc)
+                }
                 boardAgain();
             });
         });
     };
 
     var publishBoard = function(){
-         stompClient.send("/topic/board", {}, "");
+         stompClient.send("/topic/board", {}, JSON.stringify(Object.keys(datos)));
     }
 
 return{
