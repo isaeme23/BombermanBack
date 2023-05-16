@@ -2,6 +2,7 @@ edu/eci/arsw/bomberman/model/Point.class
 edu/eci/arsw/bomberman/BombermanWebsocketConfig.class
 edu/eci/arsw/bomberman/services/BombermanServices.class
 edu/eci/arsw/bomberman/persistence/BombermanPersistence.class
+edu/eci/arsw/cache/CacheBomberman.class
 edu/eci/arsw/bomberman/model/Bomb.class
 edu/eci/arsw/bomberman/controllers/BombermanController.class
 edu/eci/arsw/bomberman/model/Board.class

@@ -2,6 +2,7 @@
 /Users/isaeme23/BombermanARSW/src/main/java/edu/eci/arsw/bomberman/services/BombermanServices.java
 /Users/isaeme23/BombermanARSW/src/main/java/edu/eci/arsw/bomberman/model/Point.java
 /Users/isaeme23/BombermanARSW/src/main/java/edu/eci/arsw/bomberman/model/Status.java
+/Users/isaeme23/BombermanARSW/src/main/java/edu/eci/arsw/cache/CacheBomberman.java
 /Users/isaeme23/BombermanARSW/src/main/java/edu/eci/arsw/bomberman/model/Position.java
 /Users/isaeme23/BombermanARSW/src/main/java/edu/eci/arsw/bomberman/model/Player.java
 /Users/isaeme23/BombermanARSW/src/main/java/edu/eci/arsw/bomberman/model/Board.java
