@@ -1,13 +1,10 @@
 package edu.eci.arsw.bomberman.controllers;
 
-import edu.eci.arsw.bomberman.model.Player;
 import edu.eci.arsw.bomberman.services.BombermanServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
