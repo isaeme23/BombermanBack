@@ -2,15 +2,16 @@ package edu.eci.arsw.bomberman.model;
 
 import org.javatuples.Pair;
 
+import java.io.Serializable;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class Board {
+public class Board implements Serializable {
 
     ConcurrentHashMap<Pair<Integer, Integer>, Position> Positions = new ConcurrentHashMap<>();
 
     public Board(){
-        for (int x = 0; x < 10; x++){
-            for (int y = 0; y < 10; y++){
+        for (int x = 0; x < 21; x++){
+            for (int y = 0; y < 13; y++){
                 Positions.put(new Pair<>(x, y), new Position(x, y));
             }
         }
@@ -54,5 +55,10 @@ public class Board {
         Positions.get(new Pair<>(player.getX(), player.getY()-1)).placePlayer(player);
         Positions.get(new Pair<>(player.getX(), player.getY())).setStatus(Status.EMPTY);
         player.moveDown();
+    }
+    public String toString() {
+        return "Board{" +
+                "Positions=" + Positions +
+                '}';
     }
 }

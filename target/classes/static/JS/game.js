@@ -1,4 +1,3 @@
-
 var game = (function(client){
 
     const canvas = document.getElementById('game1');
@@ -58,7 +57,6 @@ var tablero = function(data){
 
 function dibujarTablero(){
     context.clearRect(0, 0, canvas.width, canvas.height);
-    console.log(datos)
     let names = Object.keys(datos)
     for (let i = 0; i < board.length; i++){
         for (let j = 0; j < board[i].length; j++){

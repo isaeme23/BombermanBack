@@ -12,11 +12,10 @@ import java.util.logging.Logger;
 @RestController
 @RequestMapping(value = "/board")
 public class BombermanController {
-
     @Autowired
     BombermanServices bombermanServices;
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<?> getBoardFront(){
+    public ResponseEntity<?> getBoard(){
         try {
             //obtener datos que se enviarán a través del API
             return new ResponseEntity<>(bombermanServices.getBoard(), HttpStatus.ACCEPTED);

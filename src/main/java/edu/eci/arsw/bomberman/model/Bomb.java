@@ -1,6 +1,8 @@
 package edu.eci.arsw.bomberman.model;
 
-public class Bomb {
+import java.io.Serializable;
+
+public class Bomb implements Serializable {
     private int x;
     private int y;
 
@@ -28,5 +30,13 @@ public class Bomb {
     public void explode() {
         this.x = -1;
         this.y = -1;
+    }
+
+    @Override
+    public String toString() {
+        return "Bomb{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
     }
 }
