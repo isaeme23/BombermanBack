@@ -38,6 +38,7 @@ public class BombermanPersistence {
             }
         }
         cache.getOps().set("tablero", toString(Positions));
+        cache.getOps().set("players", toString(players));
     }
 
     public Status getStatusPosition(int x, int y){
@@ -52,42 +53,50 @@ public class BombermanPersistence {
     }
 
     public void setStatusAndPlayerPosition(int x, int y, Player player){
-        ConcurrentHashMap<Pair<Integer, Integer>, Position> positionsplayers = new ConcurrentHashMap<>();
-        positionsplayers = fromString(cache.getOps().get("tablero"));
-        positionsplayers.get(new Pair<>(x, y)).placePlayer(player);
-        System.out.println(toString(positionsplayers));
-        System.out.println(positionsplayers.get(new Pair<>(1,1)).getStatus());
-        cache.getOps().set("tablero", toString(positionsplayers));
+        Positions = fromString(cache.getOps().get("tablero"));
+        Positions.get(new Pair<>(x, y)).placePlayer(player);
         player.setXY(x, y);
+        cache.getOps().set("tablero", toString(Positions));
     }
 
-    public void setStatusAndPlayerPositionRight(Player player){
+    public void setStatusAndPlayerPositionRight(String player){
+        players = fromStringPlayers(cache.getOps().get("players"));
+        Player p = players.get(player);
         Positions = fromString(cache.getOps().get("tablero"));
-        Positions.get(new Pair<>(player.getX()+1, player.getY())).placePlayer(player);
+        Positions.get(new Pair<>(p.getX()+1, p.getY())).placePlayer(p);
+        p.moveRight();
+        cache.getOps().set("players", toString(players));
         cache.getOps().set("tablero", toString(Positions));
-        player.moveRight();
     }
 
-    public void setStatusAndPlayerPositionLeft(Player player){
+    public void setStatusAndPlayerPositionLeft(String player){
+        players = fromStringPlayers(cache.getOps().get("players"));
+        Player p = players.get(player);
         Positions = fromString(cache.getOps().get("tablero"));
-        Positions.get(new Pair<>(player.getX()-1, player.getY())).placePlayer(player);
+        Positions.get(new Pair<>(p.getX()-1, p.getY())).placePlayer(p);
+        p.moveLeft();
+        cache.getOps().set("players", toString(players));
         cache.getOps().set("tablero", toString(Positions));
-        player.moveLeft();
     }
 
-    public void setStatusAndPlayerPositionUp(Player player){
+    public void setStatusAndPlayerPositionUp(String player){
+        players = fromStringPlayers(cache.getOps().get("players"));
+        Player p = players.get(player);
         Positions = fromString(cache.getOps().get("tablero"));
-        Positions.get(new Pair<>(player.getX(), player.getY()-1)).placePlayer(player);
+        Positions.get(new Pair<>(p.getX(), p.getY()-1)).placePlayer(p);
+        p.moveUp();
+        cache.getOps().set("players", toString(players));
         cache.getOps().set("tablero", toString(Positions));
-        player.moveUp();
-
     }
 
-    public void setStatusAndPlayerPositionDown(Player player){
+    public void setStatusAndPlayerPositionDown(String player){
+        players = fromStringPlayers(cache.getOps().get("players"));
+        Player p = players.get(player);
         Positions = fromString(cache.getOps().get("tablero"));
-        Positions.get(new Pair<>(player.getX(), player.getY()+1)).placePlayer(player);
+        Positions.get(new Pair<>(p.getX(), p.getY()+1)).placePlayer(p);
+        p.moveDown();
+        cache.getOps().set("players", toString(players));
         cache.getOps().set("tablero", toString(Positions));
-        player.moveDown();
     }
 
     public ConcurrentHashMap<Pair<Integer, Integer>, Position> getBoard() {
@@ -100,27 +109,29 @@ public class BombermanPersistence {
     }
 
     public void setPlayerToPositionRight(String player) {
-        setStatusAndPlayerPositionRight(players.get(player));
+        setStatusAndPlayerPositionRight(player);
     }
     public void setPlayerToPositionLeft(String player) {
-        setStatusAndPlayerPositionLeft(players.get(player));
+        setStatusAndPlayerPositionLeft(player);
     }
 
     public void setPlayerToPositionUp(String player) {
-        setStatusAndPlayerPositionUp(players.get(player));
+        setStatusAndPlayerPositionUp(player);
     }
 
     public void setPlayerToPositionDown(String player) {
-        setStatusAndPlayerPositionDown(players.get(player));
+        setStatusAndPlayerPositionDown(player);
     }
 
     public ConcurrentHashMap<String, Player> getPlayers() {
-        return players;
+        return fromStringPlayers(cache.getOps().get("players"));
     }
     public void arrangePlayer(String name, int x, int y, String color){
+        players = fromStringPlayers(cache.getOps().get("players"));
         players.put(name, new Player(x, y));
         players.get(name).setColor(color);
         setStatusAndPlayerPosition(x, y, players.get(name));
+        cache.getOps().set("players", toString(players));
     }
 
     public void setStatusPosition(int x, int y, Status status){
@@ -132,6 +143,17 @@ public class BombermanPersistence {
         try { byte [] data = Base64.getDecoder().decode( s );
             ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream( data ) );
             ConcurrentHashMap<Pair<Integer, Integer>, Position> o = (ConcurrentHashMap<Pair<Integer, Integer>, Position>) ois.readObject();
+            ois.close();
+            return o;
+        } catch (IOException | ClassNotFoundException e){
+            return null;
+        }
+    }
+
+    private static ConcurrentHashMap<String, Player> fromStringPlayers( String s ){
+        try { byte [] data = Base64.getDecoder().decode( s );
+            ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream( data ) );
+            ConcurrentHashMap<String, Player> o = (ConcurrentHashMap<String, Player>) ois.readObject();
             ois.close();
             return o;
         } catch (IOException | ClassNotFoundException e){
